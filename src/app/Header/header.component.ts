@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit {
   }
 
   SelectMenu(menuItem: string) {
-    debugger;  
     this.MenuEventClick.emit(menuItem);
   }
 
