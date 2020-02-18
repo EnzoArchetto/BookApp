@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipes/recipe.model';
 
 @Component({
@@ -12,11 +12,11 @@ export class RecipeListComponent implements OnInit {
     new Recipe('Test Recipe', 'Description Recipe', 'https://get.pxhere.com/photo/dish-food-recipe-fast-food-cuisine-garnish-snacks-vegetarian-food-power-supply-appetizer-tidbits-side-dish-arancini-hors-d-oeuvre-finger-food-rissole-croquette-fried-food-pakora-chicken-nugget-american-food-esfiha-kibe-vetkoek-1375826.jpg')
   ]
   constructor() { }
-  
-  
-  AddRecipe():void
-  {
-    let r:Recipe = new Recipe("a", "b", "c");
+
+  @Output() setDetailsList: EventEmitter<Recipe> = new EventEmitter<Recipe>();
+
+  AddRecipe(): void {
+    let r: Recipe = new Recipe("a", "b", "c");
     r.name = "aa";
     r.description = "dsd";
     this.recipes.push(r);
@@ -25,4 +25,7 @@ export class RecipeListComponent implements OnInit {
   ngOnInit() {
   }
 
+  OnDetailListSet(recipe: Recipe) {
+    this.setDetailsList.emit(recipe);
+  }
 }
