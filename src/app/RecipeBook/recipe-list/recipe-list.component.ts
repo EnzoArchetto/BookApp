@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipes/recipe.model';
+import { RecipeService } from '../recipes/recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,25 +8,18 @@ import { Recipe } from '../recipes/recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
+  constructor(private recipesService: RecipeService) { }
 
-  recipes: Recipe[] = [
-    new Recipe('Test Recipe', 'Description Recipe', 'https://get.pxhere.com/photo/dish-food-recipe-fast-food-cuisine-garnish-snacks-vegetarian-food-power-supply-appetizer-tidbits-side-dish-arancini-hors-d-oeuvre-finger-food-rissole-croquette-fried-food-pakora-chicken-nugget-american-food-esfiha-kibe-vetkoek-1375826.jpg')
-  ]
-  constructor() { }
-
-  @Output() setDetailsList: EventEmitter<Recipe> = new EventEmitter<Recipe>();
+  recipes:Recipe[] = [];
 
   AddRecipe(): void {
-    let r: Recipe = new Recipe("a", "b", "c");
+    let r: Recipe = new Recipe("a", "b", "c", []);
     r.name = "aa";
     r.description = "dsd";
     this.recipes.push(r);
   }
 
   ngOnInit() {
-  }
-
-  OnDetailListSet(recipe: Recipe) {
-    this.setDetailsList.emit(recipe);
+    this.recipes = this.recipesService.GetRecipes();
   }
 }
