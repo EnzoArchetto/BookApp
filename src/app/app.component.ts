@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'BookApp';
-  selectedMenu = "Recipes";
-  onMenuClicked(menuItem) {
-    this.selectedMenu = menuItem;
-  }
 }
